@@ -9,9 +9,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        uri: `mongodb+srv://${config.get<string>('MONGODB_USERNAME')}:${config.get<string>('MONGODB_PASSWORD')}@${config.get<string>('MONGODB_CLUSTER_URL')}/?${config.get<string>('MONGODB_OPTIONS')}`,
-      }),
+      useFactory: (config: ConfigService) => {
+        console.log(
+          `mongodb+srv://${config.get<string>('MONGODB_USERNAME')}:${config.get<string>('MONGODB_PASSWORD')}@${config.get<string>('MONGODB_CLUSTER_URL')}/?${config.get<string>('MONGODB_OPTIONS')}`,
+        );
+        return {
+          uri: `mongodb+srv://${config.get<string>('MONGODB_USERNAME')}:${config.get<string>('MONGODB_PASSWORD')}@${config.get<string>('MONGODB_CLUSTER_URL')}/?${config.get<string>('MONGODB_OPTIONS')}`,
+        };
+      },
     }),
     /* MongooseModule.forRoot(
       `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER_URL}/?${process.env.MONGODB_OPTIONS}`,
