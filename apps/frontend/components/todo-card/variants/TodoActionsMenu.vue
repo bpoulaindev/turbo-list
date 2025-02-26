@@ -15,7 +15,7 @@
         @click="emit('changeStatus', 'completed')"
       >
         <CheckCircle class="mr-2 h-4 w-4" />
-        Mark as Complete
+        Mark as complete
       </DropdownMenuItem>
       <DropdownMenuItem
         v-if="props.status !== 'pending'"
@@ -29,7 +29,7 @@
         @click="emit('changeStatus', 'doing')"
       >
         <CheckCircle class="mr-2 h-4 w-4" />
-        Mark as Doing
+        Mark as doing
       </DropdownMenuItem>
       <DropdownMenuItem @click="emit('delete')">
         <Trash2 class="mr-2 h-4 w-4" />

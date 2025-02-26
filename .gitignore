@@ -5,48 +5,24 @@ yarn.lock
 pnpm-lock.yaml
 .pnp
 .pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment Variables
 .env
 .env.*
-!.env.example  # Keep this exception if you have an example file
-
-# Logs and Temp Files
-*.log
-logs/
-*.tmp
-*.temp
-tmp/
-temp/
-
-# OS generated files # OS
-.DS_Store
-._*
-
-# IDEs and Editors
-.idea/
-.vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.swp
-*.swo
-*.vtp
-*.vs/
-*.userprefs
-.fleet/
-
-# Testing
-coverage/
-/.nyc_output
-*.lcov
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
 
 # Build and Distribution
 dist/
 build/
-.next/
 out/
+.next/
 .nuxt/
 .output/
 .nitro/
@@ -55,9 +31,45 @@ out/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
-
-# Packages output
 packages/*/dist
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs and Temp Files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Turbo
+.turbo/
+
+# Vercel
+.vercel/
+
+# IDEs and Editors
+.idea/
+.vscode/
+.fleet/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*.vtp
+.vs/
+*.userprefs
+
+# OS generated files
+.DS_Store
+._*
+*.pem
 
 # Other
 *.tgz

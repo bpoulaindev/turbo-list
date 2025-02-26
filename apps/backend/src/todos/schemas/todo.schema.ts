@@ -8,15 +8,13 @@ export type TodoDocument = HydratedDocument<TodoType>;
 @Schema()
 export class Todo implements TodoType {
   @Prop({ required: true })
-  id: string;
-
-  @Prop({ required: true })
   title: string;
 
-  @Prop()
+  @Prop({ required: true })
   description: string;
 
   @Prop({
+    required: true,
     type: String,
     enum: ['pending', 'doing', 'completed'],
     default: 'pending',
@@ -25,3 +23,17 @@ export class Todo implements TodoType {
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
+
+// map id with _id
+TodoSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+TodoSchema.set('toJSON', {
+  virtuals: true,
+  transform: (_, ret) => {
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+  },
+});

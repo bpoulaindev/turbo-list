@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "turbo-list-api",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
