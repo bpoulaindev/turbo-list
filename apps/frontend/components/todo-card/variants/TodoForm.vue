@@ -58,7 +58,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import { todoEditSchema, type TodoEditSchemaType } from "~/lib/zod-schemas";
 import { defineEmits } from "vue";
-import type { Todo } from "@repo/types";
+import type { Todo, TodoBase } from "@repo/types";
 import {
   CardContent,
   CardFooter,
@@ -67,7 +67,7 @@ import {
 } from "~/components/ui/card";
 
 const props = defineProps<{
-  todo: Todo;
+  todo: Partial<Todo> & TodoBase;
 }>();
 
 const emit = defineEmits<{
@@ -79,11 +79,13 @@ const formSchema = toTypedSchema(todoEditSchema);
 
 const { handleSubmit } = useForm<TodoEditSchemaType>({
   validationSchema: formSchema,
-  initialValues: props.todo,
+  initialValues: {
+    title: props.todo.title,
+    description: props.todo.description,
+  },
 });
 
 const onSubmit = handleSubmit((values) => {
-  console.log("You submitted the following values:", values);
   emit("submit", values);
 });
 </script>

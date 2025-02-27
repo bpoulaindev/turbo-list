@@ -1,19 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsNotEmpty, IsString, IsEnum } from 'class-validator';
-import { TodoStatus, type Todo } from '@repo/types';
+import { IsString, IsEnum } from 'class-validator';
+import { TodoStatus, type UpdateTodoPayload } from '@repo/types';
 
-export class UpdateTodoDto {
-  @IsNotEmpty()
+export class UpdateTodoDto implements Partial<UpdateTodoPayload> {
   @IsString()
-  id: Todo['id'];
-
-  @IsNotEmpty()
-  @IsString()
-  title: Todo['title'];
+  title?: string;
 
   @IsString()
-  description: Todo['description'];
+  description?: string;
 
   @IsEnum(TodoStatus)
-  status: TodoStatus;
+  status?: TodoStatus;
 }

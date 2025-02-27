@@ -11,27 +11,27 @@
         Edit
       </DropdownMenuItem>
       <DropdownMenuItem
-        v-if="props.status !== 'completed'"
-        @click="emit('changeStatus', 'completed')"
+        v-if="props.todo.status !== 'completed'"
+        @click="handleStatusUpdate('completed' as TodoStatus)"
       >
         <CheckCircle class="mr-2 h-4 w-4" />
         Mark as complete
       </DropdownMenuItem>
       <DropdownMenuItem
-        v-if="props.status !== 'pending'"
-        @click="emit('changeStatus', 'pending')"
+        v-if="props.todo.status !== 'pending'"
+        @click="handleStatusUpdate('pending' as TodoStatus)"
       >
         <CheckCircle class="mr-2 h-4 w-4" />
         Mark as pending
       </DropdownMenuItem>
       <DropdownMenuItem
-        v-if="props.status !== 'doing'"
-        @click="emit('changeStatus', 'doing')"
+        v-if="props.todo.status !== 'doing'"
+        @click="handleStatusUpdate('doing' as TodoStatus)"
       >
         <CheckCircle class="mr-2 h-4 w-4" />
         Mark as doing
       </DropdownMenuItem>
-      <DropdownMenuItem @click="emit('delete')">
+      <DropdownMenuItem @click="handleDeleteClick">
         <Trash2 class="mr-2 h-4 w-4" />
         Delete
       </DropdownMenuItem>
@@ -50,15 +50,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import type { Todo } from "@repo/types";
+import type { TodoStatus, Todo, TodoAction } from "@repo/types";
 
 const props = defineProps<{
-  status: Todo["status"];
+  todo: Todo;
+  onTodoChange: (todo: TodoAction) => void;
 }>();
 
-const emit = defineEmits({
-  edit: () => true,
-  changeStatus: (status: Todo["status"]) => status,
-  delete: () => true,
-});
+const emit = defineEmits<{
+  (e: "edit"): void;
+}>();
+
+const { handleStatusChange, handleDelete } = useTodoActions();
+
+const handleStatusUpdate = (newStatus: TodoStatus) => {
+  const action = handleStatusChange(props.todo, newStatus);
+  props.onTodoChange(action);
+};
+
+const handleDeleteClick = () => {
+  const action = handleDelete(props.todo);
+  props.onTodoChange(action);
+};
 </script>

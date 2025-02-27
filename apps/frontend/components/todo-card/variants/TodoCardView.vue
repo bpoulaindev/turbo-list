@@ -14,10 +14,9 @@
           >
         </div>
         <TodoActionsMenu
-          :status="props.todo.status"
+          :todo="props.todo"
+          :on-todo-change="props.onTodoChange"
           @edit="handleEdit"
-          @changeStatus="handleStatusChange"
-          @delete="deleteTodo"
         />
       </div>
       <CardDescription>{{ props.todo.description }}</CardDescription>
@@ -27,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Todo, TodoAction } from "@repo/types";
+import type { Todo, TodoAction, TodoStatus } from "@repo/types";
 import { cn } from "~/lib/utils";
 import { Badge } from "~/components/ui/badge";
 import {
@@ -39,7 +38,9 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import TodoActionsMenu from "./TodoActionsMenu.vue";
-import { handler } from "tailwindcss-animate";
+import { computed } from "vue";
+import { useTodoActions } from "~/composables/useTodoActions";
+
 const props = defineProps<{
   todo: Todo;
   onTodoChange: (action: TodoAction) => void;
@@ -48,20 +49,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "enterEdit"): void;
 }>();
-
-const deleteTodo = () => {
-  props.onTodoChange({
-    type: "delete",
-    payload: { id: props.todo.id },
-  });
-};
-
-const handleStatusChange = (status: Todo["status"]) => {
-  props.onTodoChange({
-    type: "update",
-    payload: { id: props.todo.id, status: status },
-  });
-};
 
 const statusLabel = computed(() => {
   switch (props.todo.status) {

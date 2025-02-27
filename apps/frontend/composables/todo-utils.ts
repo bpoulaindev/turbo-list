@@ -15,7 +15,7 @@ export function sortTodos(todos: Ref<Todo[]>): Todo[] {
   return [...todos.value].sort(sortByStatus);
 }
 
-export function updateTodo(todos: Ref<Todo[]>, action: TodoAction): void {
+/* export function updateTodo(todos: Ref<Todo[]>, action: TodoAction): void {
   if (
     action.payload &&
     typeof action.payload === "object" &&
@@ -56,4 +56,4 @@ function isTodo(obj: any): obj is Todo {
       obj.status === "doing" ||
       obj.status === "completed")
   );
-}
+  } */

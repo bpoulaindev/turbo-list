@@ -4,20 +4,45 @@ export enum TodoStatus {
   COMPLETED = "completed",
 }
 
-export type Todo = {
-  id?: string;
+export type TodoBase = {
   title: string;
   description: string;
   status: TodoStatus;
 };
 
-export enum TodoActionType {
-  CREATE = "create",
-  UPDATE = "update",
-  DELETE = "delete",
-}
-
-export type TodoAction = {
-  type: TodoActionType;
-  payload?: Todo | Partial<Todo>;
+export type Todo = TodoBase & {
+  id: string;
 };
+
+export type CreateTodoPayload = TodoBase;
+
+export type UpdateTodoPayload = {
+  id: string;
+} & Partial<TodoBase>;
+
+export type DeleteTodoPayload = {
+  id: string;
+};
+
+export const TodoActionEnum = {
+  CREATE: "create",
+  UPDATE: "update",
+  DELETE: "delete",
+} as const;
+
+export type TodoActionType =
+  (typeof TodoActionEnum)[keyof typeof TodoActionEnum];
+
+export type TodoAction =
+  | {
+      type: typeof TodoActionEnum.CREATE;
+      payload: CreateTodoPayload;
+    }
+  | {
+      type: typeof TodoActionEnum.UPDATE;
+      payload: UpdateTodoPayload;
+    }
+  | {
+      type: typeof TodoActionEnum.DELETE;
+      payload: DeleteTodoPayload;
+    };
