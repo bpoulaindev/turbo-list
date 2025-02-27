@@ -1,84 +1,77 @@
-# Turborepo starter
+# Turborepo Todo App
 
-This Turborepo starter is maintained by the Turborepo core team.
+This project is a full-stack Todo application built with NestJS (backend) and Nuxt 3 (frontend) using Turborepo for monorepo management.
 
-## Using this example
+## Getting Started
 
-Run the following command:
+1.  **Install Turbo:**  Ensure you have the Turbo CLI installed globally:
 
-```sh
-npx create-turbo@latest
+    ```bash
+    npm install -g turbo
+    ```
+
+2.  **Backend Setup (.env):**  Create a `.env` file in the `/apps/backend` directory.  Populate it with your MongoDB connection string.  You'll receive the connection string from your email.  The file should look like this (replace placeholders with your actual credentials):
+
+    ```env
+    MONGODB_URI=mongodb+srv://<your_username>:<your_password>@<your_cluster>.mongodb.net/<your_database>?retryWrites=true&w=majority
+    ```
+
+
+3.  **Frontend Setup (.env):** Create a `.env` file in the `/apps/frontend` directory. This file will specify the backend API URL:
+
+    ```env
+    API_BASE_URL=http://localhost:5000
+    ```
+
+    **Important:** Ensure your backend is running on port 5000.
+
+
+4. **Install dependencies:**
+
+    ```bash
+    cd turbo-list
+    pnpm install
+    ```
+5. **Run the application:**
+
+    ```bash
+    npm run dev
+    ```
+
+    This will start both the backend and frontend development servers.
+
+
+6.  **Access the App:** Open your browser and navigate to `http://localhost:3000` to use the Todo app.
+
+
+## Project Structure
+
+*   `/apps/backend`: NestJS backend server
+*   `/apps/frontend`: Nuxt 3 frontend application
+*   `/packages`: Shared types and possibly other packages
+
+## Development
+
+*   The backend runs on port 5000, while the frontend is running on port 3000.
+*   All backend API calls from the frontend should be directed to `http://localhost:5000`.
+*   The frontend and backend are built using TypeScript.
+*  The `.env` files provide environment-specific variables for the respective applications.
+
+## Testing
+
+Tests are located in the `apps/frontend/tests` directory (co-located next to the source files). You can run the tests using `npm test` at the root of the repository.
+
+```bash
+cd turbo-list/apps/frontend
+npm test
 ```
+This runs Jest tests.
 
-## What's inside?
+## Useful Commands
 
-This Turborepo includes the following packages/apps:
+*   `pnpm install`: Install dependencies across the entire monorepo.
+*   `pnpm dev`: Run the development server for both apps (backend and frontend).
+*   `pnpm build`: Build the frontend and backend for production.  Use this command before deploying.
 
-### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Remember to replace placeholder values in the `.env` files with your actual credentials.
