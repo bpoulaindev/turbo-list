@@ -69,9 +69,9 @@ This runs Jest tests.
 
 ## Useful Commands
 
-*   `pnpm install`: Install dependencies across the entire monorepo.
-*   `pnpm dev`: Run the development server for both apps (backend and frontend).
-*   `pnpm build`: Build the frontend and backend for production.  Use this command before deploying.
+*   `npm install`: Install dependencies across the entire monorepo.
+*   `npm run dev`: Run the development server for both apps (backend and frontend).
+*   `npm run build`: Build the frontend and backend for production.  Use this command before deploying.
 
 
 Remember to replace placeholder values in the `.env` files with your actual credentials.
