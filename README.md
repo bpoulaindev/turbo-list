@@ -30,7 +30,7 @@ This project is a full-stack Todo application built with NestJS (backend) and Nu
 
     ```bash
     cd turbo-list
-    pnpm install
+    npm install
     ```
 5. **Run the application:**
 
